@@ -38,6 +38,7 @@ public class BeanUtils {
 
     public void copyProperties(Object src, Map dest) {
         //BeanMap beanMap = beanMapMap.computeIfAbsent(src.getClass(), c -> BeanMap.create(src));
+        //TODO 这里每次都要创建类属性访问器， 要调研一下有没有办法缓存类属性的访问器，然后传入对象来获取就好了
         BeanMap beanMap = BeanMap.create(src);
         dest.putAll(beanMap);
     }
