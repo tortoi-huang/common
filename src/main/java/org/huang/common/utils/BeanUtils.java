@@ -52,6 +52,7 @@ public class BeanUtils {
     /**
      * 这个重载方法是为了防止前面两个方法，遇到两个map参数的情况，
      * 使用重载可以节省copyProperties(Object src, Map dest) 和 copyProperties(Map src, Object dest)判断 两个map参数的逻辑
+     *
      * @param src
      * @param dest
      */
@@ -60,21 +61,22 @@ public class BeanUtils {
     }
 
     public void copy(Object src, Map dest) {
-        copyProperties(src,dest);
+        copyProperties(src, dest);
     }
 
     public void copy(Map src, Object dest) {
-        copyProperties(src,dest);
+        copyProperties(src, dest);
     }
 
     /**
      * 这个重载方法是为了防止前面两个方法，遇到两个map参数的情况，
      * 使用重载可以节省copyProperties(Object src, Map dest) 和 copyProperties(Map src, Object dest)判断 两个map参数的逻辑
+     *
      * @param src
      * @param dest
      */
     public void copy(Map src, Map dest) {
-        copyProperties(src,dest);
+        copyProperties(src, dest);
     }
 
     /**
@@ -93,7 +95,7 @@ public class BeanUtils {
     public <T> T map(Object src, Class<T> type) {
         try {
             FastClass fastClass = fastClassMap.computeIfAbsent(type, FastClass::create);
-            T t = (T)fastClass.newInstance();
+            T t = (T) fastClass.newInstance();
             copy(src, t);
             return t;
         } catch (InvocationTargetException e) {
@@ -102,9 +104,9 @@ public class BeanUtils {
     }
 
     public <T> List<T> map2list(Collection src, Class<T> type) {
-        List<T> list = new ArrayList<>((int)(src.size() / 0.75));
+        List<T> list = new ArrayList<>(src.size());
         for (Object o : src) {
-            list.add(map(o,type));
+            list.add(map(o, type));
         }
         return list;
     }
